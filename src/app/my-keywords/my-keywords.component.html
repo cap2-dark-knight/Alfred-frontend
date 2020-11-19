@@ -1,0 +1,26 @@
+<h2>Add a keyword</h2>
+<form (ngSubmit)="addKeyword()">
+  <div class="form-row align-items-center">
+    <div class="col-auto">
+      <input type="text" [(ngModel)]="newKeyword" name="new-keyword" class="form-control" placeholder="Riptide">
+    </div>
+    <div class="col-auto">
+      <button type="submit" class="btn btn-primary">Add</button>
+    </div>
+  </div>
+</form>
+
+<ng-container *ngIf="myKeywords$ | async as keywords">
+  <h2>My keywords</h2>
+  <app-keyword-list [keywords]="keywords" bgClass="bg-info"></app-keyword-list>
+</ng-container>
+
+<ng-container *ngIf="mySmartKeywords$ | async as keywords">
+  <h2>My smart keywords</h2>
+  <app-keyword-list [keywords]="keywords" bgClass="bg-warning"></app-keyword-list>
+</ng-container>
+
+<ng-container *ngIf="recSmartKeywords$ | async as keywords">
+  <h2>Recommended smart keywords</h2>
+  <app-keyword-list [keywords]="keywords" bgClass="bg-secondary"></app-keyword-list>
+</ng-container>

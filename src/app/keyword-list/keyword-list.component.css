@@ -1,0 +1,11 @@
+:host {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+}
+
+.keyword {
+  padding: 0.75rem 2.5rem;
+  margin: 0 1rem 1rem 0;
+  font-weight: 700;
+}
