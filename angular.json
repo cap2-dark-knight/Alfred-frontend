@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ang-test": {
+    "alfred": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ang-test",
+            "outputPath": "dist/alfred",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -65,18 +65,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ang-test:build"
+            "browserTarget": "alfred:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ang-test:build:production"
+              "browserTarget": "alfred:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ang-test:build"
+            "browserTarget": "alfred:build"
           }
         },
         "test": {
@@ -113,16 +113,16 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "ang-test:serve"
+            "devServerTarget": "alfred:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "ang-test:serve:production"
+              "devServerTarget": "alfred:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "ang-test"
+  "defaultProject": "alfred"
 }
