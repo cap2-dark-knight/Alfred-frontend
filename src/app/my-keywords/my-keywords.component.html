@@ -21,6 +21,6 @@
 </ng-container>
 
 <ng-container *ngIf="recSmartKeywords$ | async as keywords">
-  <h2>Recommended smart keywords</h2>
+  <h2>Recommendations</h2>
   <app-keyword-list [keywords]="keywords" bgClass="bg-secondary"></app-keyword-list>
 </ng-container>
