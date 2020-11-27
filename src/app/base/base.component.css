@@ -6,13 +6,27 @@
 
 .navbar {
   height: 5rem;
+  font-size: 2rem;
+  font-family: "Times New Roman", Times, serif;
+  color: white;
 }
 
 .navbar-brand {
-  font-size: 2rem;
+  font-size: 1.3rem;
   font-family: "Times New Roman", Times, serif;
+  padding-right: 5rem;
+  padding-left: 5rem;
 }
 
 .navbar + .container-lg {
   padding: 5rem;
 }
+
+p {
+  margin: 0;
+  font-size: 1rem;
+  font-family: "Times New Roman", Times, serif;
+  text-align: center;
+  color: gray;
+}
+

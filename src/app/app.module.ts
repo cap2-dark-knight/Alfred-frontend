@@ -9,6 +9,9 @@ import { LoginComponent } from './login/login.component';
 import { BaseComponent } from './base/base.component';
 import { KeywordListComponent } from './keyword-list/keyword-list.component';
 import { MyKeywordsComponent } from './my-keywords/my-keywords.component';
+import { MemberComponent } from './member/member.component';
+import { NewsComponent } from './news/news.component';
+import { JoinComponent } from './join/join.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +20,9 @@ import { MyKeywordsComponent } from './my-keywords/my-keywords.component';
     BaseComponent,
     KeywordListComponent,
     MyKeywordsComponent,
+    MemberComponent,
+    NewsComponent,
+    JoinComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, NgbModule, FormsModule],
   providers: [],
