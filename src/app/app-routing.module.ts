@@ -3,9 +3,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { BaseComponent } from './base/base.component';
 import { MyKeywordsComponent } from './my-keywords/my-keywords.component';
 import { NewsComponent } from './news/news.component';
-import { JoinComponent } from './join/join.component';
-import { LoginComponent } from './login/login.component';
-import { MemberComponent } from './member/member.component';
+import { RegisterFormComponent } from './register-form/register-form.component';
+import { LoginBaseComponent } from './login-base/login-base.component';
+import { LoginFormComponent } from './login-form/login-form.component';
 
 const routes: Routes = [
   {
@@ -13,30 +13,28 @@ const routes: Routes = [
     component: BaseComponent,
     children: [
       {
-        path: '',
+        path: 'news',
         component: NewsComponent,
       },
       {
         path: 'my-keywords',
         component: MyKeywordsComponent,
       },
-      {
-        path: 'member',
-        component: MemberComponent,
-      },
-      {
-        path: 'news',
-        component: NewsComponent,
-      },
-    ]
+    ],
   },
   {
-    path: 'app/login',
-    component: LoginComponent,
-  },
-  {
-    path: 'app/join',
-    component: JoinComponent,
+    path: 'login',
+    component: LoginBaseComponent,
+    children: [
+      {
+        path: 'register',
+        component: RegisterFormComponent,
+      },
+      {
+        path: '',
+        component: LoginFormComponent,
+      },
+    ],
   },
   {
     path: '',

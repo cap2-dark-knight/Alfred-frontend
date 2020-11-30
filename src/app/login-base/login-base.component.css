@@ -1,0 +1,34 @@
+:host {
+  height: 100%;
+  width: 100%;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+}
+
+.logo {
+  padding-top: 6rem;
+  text-align: center;
+}
+
+.logo hr {
+  height: 3px;
+  width: 27rem;
+  background: black;
+}
+
+.logo h1 {
+  font-size: 10rem;
+  font-weight: bold;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.logo h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.info {
+  font-size: 1rem;
+  font-family: "Times New Roman", Times, serif;
+}

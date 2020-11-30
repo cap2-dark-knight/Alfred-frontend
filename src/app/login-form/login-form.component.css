@@ -1,0 +1,19 @@
+:host {
+  display: block;
+}
+
+form {
+  margin-top: 3rem;
+}
+
+form input {
+  margin: 0.25rem 0;
+}
+
+form button {
+  margin-top: 1rem;
+}
+
+form a:hover {
+  cursor: pointer;
+}
