@@ -1,9 +1,9 @@
-<form class="d-flex flex-column">
-  <input type="text" name="username" class="form-control" placeholder="Name" required autofocus>
-  <input type="email" name="email" class="form-control" placeholder="Email" required>
-  <input type="password" name="password" autocomplete="new-password" class="form-control" placeholder="Password"
-    required>
-  <input type="password" name="password" autocomplete="new-password" class="form-control" placeholder="Confirm Password"
-    required>
+<form [formGroup]="registerForm" (ngSubmit)="onJoin()" class="d-flex flex-column">
+  <input type="text" name="username" formControlName="name" class="form-control" placeholder="Name" required autofocus>
+  <input type="email" name="email" formControlName="username" class="form-control" placeholder="Email" required>
+  <input type="password" name="password" formControlName="password" autocomplete="new-password" class="form-control"
+    placeholder="Password" required>
+  <input type="password" name="password" formControlName="passwordVerif" autocomplete="new-password"
+    class="form-control" placeholder="Confirm Password" required>
   <button type="submit" class="btn btn-primary">Join</button>
 </form>
