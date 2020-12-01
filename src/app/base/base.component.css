@@ -6,20 +6,38 @@
 
 .navbar {
   height: 5rem;
-  font-size: 2rem;
+  font-size: 1.75rem;
   font-family: "Times New Roman", Times, serif;
   color: white;
 }
 
+.navbar .container-lg {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
 .navbar-brand {
-  font-size: 1.3rem;
+  font-size: 2rem;
   font-family: "Times New Roman", Times, serif;
-  padding-right: 5rem;
-  padding-left: 5rem;
+  padding-right: 3rem;
+}
+
+.nav-item {
+  padding-right: 2rem;
+}
+
+.navbar .logout {
+  cursor: pointer;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.navbar .logout:hover {
+  color: rgba(255, 255, 255, 0.75);
 }
 
 .navbar + .container-lg {
-  padding: 5rem;
+  padding-top: 5rem;
 }
 
 p {
@@ -29,4 +47,3 @@ p {
   text-align: center;
   color: gray;
 }
-

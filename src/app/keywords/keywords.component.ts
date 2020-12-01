@@ -5,11 +5,11 @@ import { KeywordService } from '../keyword.service';
 import { ModalService } from '../modal.service';
 
 @Component({
-  selector: 'app-my-keywords',
-  templateUrl: './my-keywords.component.html',
-  styleUrls: ['./my-keywords.component.css'],
+  selector: 'app-keywords',
+  templateUrl: './keywords.component.html',
+  styleUrls: ['./keywords.component.css'],
 })
-export class MyKeywordsComponent implements OnInit {
+export class KeywordsComponent implements OnInit {
   myKeywords: Keyword[] = [];
 
   newKeyword = '';

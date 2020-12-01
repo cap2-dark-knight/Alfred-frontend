@@ -1,8 +1,9 @@
 export interface News {
   id: number;
   title: string;
-  timestamp: Date;
+  updated_time: Date;
   content: string;
-  keyword: number;
-  link: string;
+  keywords_id: number;
+  url: string;
+  image_url: string;
 }

@@ -10,7 +10,7 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginBaseComponent } from './login-base/login-base.component';
 import { BaseComponent } from './base/base.component';
 import { KeywordListComponent } from './keyword-list/keyword-list.component';
-import { MyKeywordsComponent } from './my-keywords/my-keywords.component';
+import { KeywordsComponent } from './keywords/keywords.component';
 import { NewsComponent } from './news/news.component';
 import { RegisterFormComponent } from './register-form/register-form.component';
 import { LoginFormComponent } from './login-form/login-form.component';
@@ -22,7 +22,7 @@ import { ModalComponent } from './modal/modal.component';
     LoginBaseComponent,
     BaseComponent,
     KeywordListComponent,
-    MyKeywordsComponent,
+    KeywordsComponent,
     NewsComponent,
     RegisterFormComponent,
     LoginFormComponent,
