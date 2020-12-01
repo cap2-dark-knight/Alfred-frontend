@@ -1,39 +1,75 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError, tap, map } from 'rxjs/operators';
 import { Keyword } from 'src/models/keyword';
-import { MY_KEYWORDS, REC_S_KEYWORDS, MY_S_KEYWORDS } from 'src/mock/keywords'; // TODO: REMOVE LATER
 
 @Injectable({
   providedIn: 'root',
 })
 export class KeywordService {
   myKeywords: Keyword[] = [];
-  mySmartKeywords: Keyword[] = [];
-  recSmartKeywords: Keyword[] = [];
 
-  index = 90; // TODO: REMOVE LATER
-
-  constructor() {
-    this.myKeywords = MY_KEYWORDS;
-    this.mySmartKeywords = MY_S_KEYWORDS;
-    this.recSmartKeywords = REC_S_KEYWORDS;
-  }
+  constructor(private http: HttpClient) {}
 
   getMyKeywords(): Observable<Keyword[]> {
-    return of(this.myKeywords).pipe(delay(300));
+    const URL = '/common/keyword';
+    return this.http
+      .get<{ keywords: { id: number; keyword: string }[] }>(URL)
+      .pipe(
+        // tap((res) => console.log(res)),
+        catchError((err) => throwError(err)),
+        map((res) =>
+          res.keywords.map((k) => Object.create({ id: k.id, value: k.keyword }))
+        )
+      );
   }
 
-  getMySmartKeywords(): Observable<Keyword[]> {
-    return of(this.mySmartKeywords).pipe(delay(300));
+  putKeyword(
+    keyword: string
+  ): Observable<{ success: true; keywords: Keyword[] }> {
+    const URL = `/common/keyword/${keyword}/update`;
+    return this.http
+      .put<{
+        result: string;
+        info: string;
+        keywords: { id: number; keyword: string }[];
+      }>(URL, {})
+      .pipe(
+        // tap((res) => console.log(res)),
+        catchError((err) => throwError(err)),
+        map((res) =>
+          Object.create({
+            success: res.result === 'success',
+            keywords: res.keywords.map((k) =>
+              Object.create({ id: k.id, value: k.keyword })
+            ),
+          })
+        )
+      );
   }
 
-  getRecSmartKeywords(): Observable<Keyword[]> {
-    return of(this.recSmartKeywords).pipe(delay(300));
-  }
-
-  addKeyword(keyword: string): Observable<Keyword[]> {
-    this.myKeywords.push({ id: this.index++, value: keyword });
-    return of(this.myKeywords).pipe(delay(300));
+  deleteKeyword(
+    keyword: string
+  ): Observable<{ success: true; keywords: Keyword[] }> {
+    const URL = `/common/keyword/${keyword}/delete`;
+    return this.http
+      .put<{
+        result: string;
+        info: string;
+        keywords: { id: number; keyword: string }[];
+      }>(URL, {})
+      .pipe(
+        // tap((res) => console.log(res)),
+        catchError((err) => throwError(err)),
+        map((res) =>
+          Object.create({
+            success: res.result === 'success',
+            keywords: res.keywords.map((k) =>
+              Object.create({ id: k.id, value: k.keyword })
+            ),
+          })
+        )
+      );
   }
 }

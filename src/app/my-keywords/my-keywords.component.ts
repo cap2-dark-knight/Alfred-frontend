@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+
 import { Keyword } from 'src/models/keyword';
 import { KeywordService } from '../keyword.service';
+import { ModalService } from '../modal.service';
 
 @Component({
   selector: 'app-my-keywords',
@@ -9,25 +10,43 @@ import { KeywordService } from '../keyword.service';
   styleUrls: ['./my-keywords.component.css'],
 })
 export class MyKeywordsComponent implements OnInit {
-  myKeywords$: Observable<Keyword[]>;
-  mySmartKeywords$: Observable<Keyword[]>;
-  recSmartKeywords$: Observable<Keyword[]>;
+  myKeywords: Keyword[] = [];
 
   newKeyword = '';
 
-  constructor(private keywordService: KeywordService) {
-    this.myKeywords$ = this.keywordService.getMyKeywords();
-    this.mySmartKeywords$ = this.keywordService.getMySmartKeywords();
-    this.recSmartKeywords$ = this.keywordService.getRecSmartKeywords();
-  }
+  constructor(
+    private keywordService: KeywordService,
+    private modalService: ModalService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.keywordService
+      .getMyKeywords()
+      .subscribe((res) => (this.myKeywords = res));
+  }
 
   addKeyword(): void {
     if (this.newKeyword.trim() === '') {
       return;
     }
-    this.myKeywords$ = this.keywordService.addKeyword(this.newKeyword);
+    this.keywordService.putKeyword(this.newKeyword).subscribe((res) => {
+      if (!res.success) {
+        this.modalService.showModal(
+          'Failed to add keyword',
+          [
+            {
+              text: 'close',
+              context: 'secondary',
+              handler: () => {
+                this.modalService.closeModal();
+              },
+            },
+          ],
+          'Keyword is already added.'
+        );
+      }
+      this.myKeywords = res.keywords;
+    });
     this.newKeyword = '';
   }
 }

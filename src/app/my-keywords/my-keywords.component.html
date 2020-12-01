@@ -10,19 +10,9 @@
   </div>
 </form>
 
-<ng-container *ngIf="recSmartKeywords$ | async as keywords">
-  <h2>Recommendations</h2>
-  <app-keyword-list [keywords]="keywords" bgClass="bg-secondary"></app-keyword-list>
-</ng-container>
-
-<ng-container *ngIf="myKeywords$ | async as keywords">
+<ng-container *ngIf="myKeywords">
   <h2>My keywords</h2>
-  <app-keyword-list [keywords]="keywords" bgClass="bg-info"></app-keyword-list>
-</ng-container>
-
-<ng-container *ngIf="mySmartKeywords$ | async as keywords">
-  <h2>My smart keywords</h2>
-  <app-keyword-list [keywords]="keywords" bgClass="bg-warning"></app-keyword-list>
+  <app-keyword-list [keywords]="myKeywords" bgClass="bg-info"></app-keyword-list>
 </ng-container>
 
 <h2>Notification frequency setting</h2>

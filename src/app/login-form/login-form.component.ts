@@ -12,7 +12,7 @@ import { ModalService } from '../modal.service';
 })
 export class LoginFormComponent implements OnInit {
   loginForm: FormGroup = new FormGroup({
-    username: new FormControl('', {
+    email: new FormControl('', {
       validators: [Validators.required, Validators.email],
       updateOn: 'submit',
     }),
@@ -34,9 +34,9 @@ export class LoginFormComponent implements OnInit {
     if (!this.loginForm.valid) {
       return;
     }
-    const username = this.loginForm.get('username')?.value;
+    const email = this.loginForm.get('email')?.value;
     const password = this.loginForm.get('password')?.value;
-    this.authService.postLogin(username, password).subscribe((res) => {
+    this.authService.postLogin(email, password).subscribe((res) => {
       if (res) {
         this.router.navigate(['/app']);
       } else {

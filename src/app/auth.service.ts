@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { of, Observable, throwError } from 'rxjs';
-import { catchError, delay, map, tap, retry } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -9,25 +9,44 @@ import { catchError, delay, map, tap, retry } from 'rxjs/operators';
 export class AuthService {
   constructor(private http: HttpClient) {}
 
-  postLogin(username: string, password: string): Observable<boolean> {
-    const URL = '127.0.0.1:8000/accounts/signin';
-    return of(password !== 'false').pipe(delay(300)); // FIXME: change later
-    // return this.http
-    //   .post<{ ok: boolean }>(URL, { username, password })
-    //   .pipe(
-    //     tap((res) => console.log(res)),
-    //     map((res) => res.ok)
-    //   );
+  postLogin(email: string, password: string): Observable<boolean> {
+    const URL = '/common/accounts/signin';
+    return this.http
+      .post<{ result: 'success' | 'fail' }>(URL, { email, password })
+      .pipe(
+        // tap((res) => console.log(res)),
+        catchError((err) => throwError(err)),
+        map((res) => res.result === 'success')
+      );
   }
 
-  postSignup(email: string, password: string): Observable<boolean> {
-    const URL = '127.0.0.1:8000/accounts/signup';
-    return of(password !== 'false').pipe(delay(300)); // FIXME: change later
-    // return this.http
-    //   .post<{ ok: boolean }>(URL, { username, password })
-    //   .pipe(
-    //     tap((res) => console.log(res)),
-    //     map((res) => res.ok)
-    //   );
+  getLogout(): Observable<boolean> {
+    const URL = '/common/accounts/signout';
+    return this.http.get<{ result: 'success' | 'fail' }>(URL).pipe(
+      // tap((res) => console.log(res)),
+      catchError((err) => throwError(err)),
+      map((res) => res.result === 'success')
+    );
+  }
+
+  postSignup(
+    email: string,
+    firstName: string,
+    lastName: string,
+    password: string
+  ): Observable<boolean> {
+    const URL = '/common/accounts/signup';
+    return this.http
+      .post<{ result: 'success' | 'fail'; info?: string }>(URL, {
+        email,
+        first_name: firstName,
+        last_name: lastName,
+        password,
+      })
+      .pipe(
+        // tap((res) => console.log(res)),
+        catchError((err) => throwError(err)),
+        map((res) => res.result === 'success')
+      );
   }
 }
