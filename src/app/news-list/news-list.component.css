@@ -1,0 +1,22 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  padding-left: 0;
+  margin-bottom: 0;
+  border-radius: 0.25rem;
+}
+
+.list-group-item {
+  cursor: pointer;
+}
+
+.list-group-item img {
+  width: 132px;
+  height: 90px;
+  margin-right: 1.25rem;
+}
+
+.list-group-item .timestamp {
+  margin-top: auto;
+  font-size: 0.75rem;
+}

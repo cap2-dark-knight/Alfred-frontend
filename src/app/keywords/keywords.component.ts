@@ -10,7 +10,7 @@ import { ModalService } from '../modal.service';
   styleUrls: ['./keywords.component.css'],
 })
 export class KeywordsComponent implements OnInit {
-  myKeywords: Keyword[] = [];
+  keywords: Keyword[] = [];
 
   newKeyword = '';
 
@@ -22,7 +22,7 @@ export class KeywordsComponent implements OnInit {
   ngOnInit(): void {
     this.keywordService
       .getMyKeywords()
-      .subscribe((res) => (this.myKeywords = res));
+      .subscribe((res) => (this.keywords = res));
   }
 
   addKeyword(): void {
@@ -35,7 +35,7 @@ export class KeywordsComponent implements OnInit {
           'Failed to add keyword',
           [
             {
-              text: 'close',
+              text: 'Close',
               context: 'secondary',
               handler: () => {
                 this.modalService.closeModal();
@@ -45,8 +45,59 @@ export class KeywordsComponent implements OnInit {
           'Keyword is already added.'
         );
       }
-      this.myKeywords = res.keywords;
+      this.keywords = res.keywords;
     });
     this.newKeyword = '';
+  }
+
+  removeKeyword(keyword: string): void {
+    if (keyword.trim() === '') {
+      return;
+    }
+    this.keywordService.deleteKeyword(keyword).subscribe((res) => {
+      if (!res.success) {
+        this.modalService.showModal(
+          'Failed to delete keyword',
+          [
+            {
+              text: 'Close',
+              context: 'secondary',
+              handler: () => {
+                this.modalService.closeModal();
+              },
+            },
+          ],
+          'Keyword does not exist.'
+        );
+      }
+      this.keywords = res.keywords;
+    });
+  }
+
+  showDeleteModal(id: number): void {
+    const keyword = this.keywords.find((k) => k.id === id)?.value;
+    if (keyword) {
+      this.modalService.showModal(
+        'Remove keyword',
+        [
+          {
+            text: 'Remove',
+            context: 'danger',
+            handler: () => {
+              this.removeKeyword(keyword);
+              this.modalService.closeModal();
+            },
+          },
+          {
+            text: 'Cancel',
+            context: 'secondary',
+            handler: () => {
+              this.modalService.closeModal();
+            },
+          },
+        ],
+        `Would you like to remove the keyword \'${keyword}\' from your subscription?`
+      );
+    }
   }
 }

@@ -20,6 +20,11 @@ const routes: Routes = [
         path: 'keywords',
         component: KeywordsComponent,
       },
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'news',
+      },
     ],
   },
   {

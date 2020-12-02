@@ -55,7 +55,7 @@ export class KeywordService {
   ): Observable<{ success: true; keywords: Keyword[] }> {
     const URL = `/common/keyword/${keyword}/delete`;
     return this.http
-      .put<{
+      .delete<{
         result: string;
         info: string;
         keywords: { id: number; keyword: string }[];

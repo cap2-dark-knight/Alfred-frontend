@@ -16,6 +16,7 @@ import { RegisterFormComponent } from './register-form/register-form.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { ModalComponent } from './modal/modal.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NewsListComponent } from './news-list/news-list.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     RegisterFormComponent,
     LoginFormComponent,
     ModalComponent,
+    NewsListComponent,
   ],
   imports: [
     BrowserModule,

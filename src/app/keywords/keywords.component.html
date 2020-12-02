@@ -10,9 +10,10 @@
   </div>
 </form>
 
-<ng-container *ngIf="myKeywords">
+<ng-container *ngIf="keywords">
   <h2>My keywords</h2>
-  <app-keyword-list [keywords]="myKeywords" bgClass="bg-info"></app-keyword-list>
+  <app-keyword-list [keywords]="keywords" (keywordClick)="showDeleteModal($event)" bgClass="bg-info">
+  </app-keyword-list>
 </ng-container>
 
 <h2>Notification frequency setting</h2>
@@ -26,5 +27,6 @@
 </select>
 
 <div>
-  <a routerLink="/app/member" routerLinkActive="active"><button type="button" class="centered btn btn-outline-secondary">Member information Editing</button></a>
+  <a routerLink="/app/member" routerLinkActive="active"><button type="button"
+      class="centered btn btn-outline-secondary">Member information Editing</button></a>
 </div>

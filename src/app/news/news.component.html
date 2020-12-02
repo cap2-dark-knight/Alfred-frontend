@@ -1,1 +1,9 @@
-<p>news works!</p>
+<ng-container *ngIf="keywords">
+    <h2>Select a keyword</h2>
+    <app-keyword-list [keywords]="keywords" (keywordClick)="onKeywordSelect($event)" bgClass="bg-info">
+    </app-keyword-list>
+</ng-container>
+
+<h2 *ngIf="selectedKeyword">News from keyword {{selectedKeyword?.value}}</h2>
+<h2 *ngIf="!selectedKeyword">News from all keywords</h2>
+<app-news-list [news]="selectedNews"></app-news-list>

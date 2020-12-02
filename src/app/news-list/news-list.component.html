@@ -1,0 +1,10 @@
+<ng-container *ngFor="let n of news">
+    <a class="list-group-item list-group-item-action d-flex flex-row" (click)="openURL(n.url)">
+        <img [src]="n.image_url">
+        <div class="d-flex flex-column">
+            <h5>{{ n.title }}</h5>
+            {{ n.content }}
+            <div class="timestamp">Updated on: {{n.updated_time | date:'medium'}}</div>
+        </div>
+    </a>
+</ng-container>
