@@ -19,6 +19,30 @@ export class BaseComponent implements OnInit {
   ngOnInit(): void {}
 
   onLogout(): void {
+    this.modalService.showModal(
+      'Log out',
+      [
+        {
+          text: 'Yes',
+          context: 'primary',
+          handler: () => {
+            this.logout();
+            this.modalService.closeModal();
+          },
+        },
+        {
+          text: 'No',
+          context: 'secondary',
+          handler: () => {
+            this.modalService.closeModal();
+          },
+        },
+      ],
+      'Would you like to log out from Alfred?'
+    );
+  }
+
+  logout(): void {
     this.authService.getLogout().subscribe((res) => {
       if (res) {
         this.router.navigate(['/login']);
