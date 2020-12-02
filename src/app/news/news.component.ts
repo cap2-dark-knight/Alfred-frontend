@@ -23,7 +23,6 @@ export class NewsComponent implements OnInit {
 
   ngOnInit(): void {
     this.newsService.getNews().subscribe((res) => {
-      console.log(res);
       this.news = res;
       this.selectedNews = this.news;
     });

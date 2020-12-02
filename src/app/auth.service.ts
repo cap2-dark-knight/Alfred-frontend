@@ -3,11 +3,22 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
+import { User } from 'src/models/user';
+
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   constructor(private http: HttpClient) {}
+
+  getUser(): Observable<User> {
+    const URL = '/common/accounts/user';
+    return this.http.get<{ result: 'success' | 'fail'; user: User }>(URL).pipe(
+      // tap((res) => console.log(res)),
+      catchError((err) => throwError(err)),
+      map((res) => res.user)
+    );
+  }
 
   postLogin(email: string, password: string): Observable<boolean> {
     const URL = '/common/accounts/signin';
