@@ -44,7 +44,11 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'login',
+    redirectTo: '/app/news',
+  },
+  {
+    path: '**',
+    redirectTo: '/app/news',
   },
 ];
 
