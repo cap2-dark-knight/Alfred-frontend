@@ -15,6 +15,7 @@ import { NewsComponent } from './news/news.component';
 import { RegisterFormComponent } from './register-form/register-form.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { ModalComponent } from './modal/modal.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { ModalComponent } from './modal/modal.component';
       headerName: 'X-CSRFToken',
     }),
     ReactiveFormsModule,
+    FontAwesomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
