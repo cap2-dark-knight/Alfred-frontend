@@ -8,10 +8,11 @@ import {
   FaIconLibrary,
 } from '@fortawesome/angular-fontawesome';
 import { fas } from '@fortawesome/free-solid-svg-icons';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import '@angular/common/locales/global/ko';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginBaseComponent } from './login-base/login-base.component';
 import { BaseComponent } from './base/base.component';
 import { KeywordListComponent } from './keyword-list/keyword-list.component';
