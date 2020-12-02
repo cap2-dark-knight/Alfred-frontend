@@ -11,6 +11,7 @@ import { Keyword } from 'src/models/keyword';
 })
 export class NewsComponent implements OnInit {
   keywords: Keyword[] = [];
+  smartKeywords: Keyword[] = [];
   news: News[] = [];
   selectedKeyword: Keyword | undefined;
   selectedNews: News[] = [];
@@ -20,6 +21,7 @@ export class NewsComponent implements OnInit {
   ngOnInit(): void {
     this.route.parent?.data.subscribe((data) => {
       this.keywords = data.keywords;
+      this.smartKeywords = data.smartKeywords;
       this.news = data.news;
       this.selectedNews = data.news;
     });

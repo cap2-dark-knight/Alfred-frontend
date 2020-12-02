@@ -9,7 +9,7 @@ import { Keyword } from 'src/models/keyword';
 })
 export class KeywordListComponent implements OnInit {
   @Input() keywords: Keyword[] = [];
-  @Input() bgClass: 'bg-info' | 'bg-warning' | 'bg-secondary' = 'bg-info';
+  @Input() smartKeywords: Keyword[] = [];
 
   @Output() keywordClick: EventEmitter<number> = new EventEmitter<number>();
 
@@ -19,5 +19,12 @@ export class KeywordListComponent implements OnInit {
 
   onClick(id: number): void {
     this.keywordClick.emit(id);
+  }
+
+  isSmartKeyword(keyword: Keyword): boolean {
+    return (
+      this.smartKeywords.findIndex((sm) => sm.keyword === keyword.keyword) !==
+      -1
+    );
   }
 }

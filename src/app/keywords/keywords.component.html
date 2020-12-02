@@ -1,18 +1,25 @@
 <h2>키워드 구독</h2>
-<form (ngSubmit)="addKeyword()">
+<form #form="ngForm" (ngSubmit)="addKeyword(newKeyword)">
   <div class="form-row align-items-center">
     <div class="col-auto">
-      <input type="text" [(ngModel)]="newKeyword" name="new-keyword" class="form-control">
+      <input type="text" [(ngModel)]="newKeyword" name="new-keyword" class="form-control" required>
     </div>
     <div class="col-auto">
-      <button type="submit" class="btn btn-primary">구독</button>
+      <button type="submit" class="btn btn-primary" [disabled]="!form.valid">구독</button>
     </div>
   </div>
 </form>
 
-<ng-container *ngIf="keywords">
+<ng-container *ngIf="keywords?.length">
   <h2>구독 중인 키워드</h2>
-  <app-keyword-list [keywords]="keywords" (keywordClick)="showDeleteModal($event)" bgClass="bg-info">
+  <app-keyword-list [keywords]="keywords" [smartKeywords]="smartKeywords" (keywordClick)="showDeleteModal($event)">
+  </app-keyword-list>
+</ng-container>
+
+<ng-container *ngIf="filteredSmartKeywords?.length">
+  <h2>추천 스마트 키워드</h2>
+  <app-keyword-list [keywords]="filteredSmartKeywords" [smartKeywords]="smartKeywords"
+    (keywordClick)="showAddSmartKeywordModal($event)">
   </app-keyword-list>
 </ng-container>
 

@@ -12,6 +12,8 @@ import { ModalService } from '../modal.service';
 })
 export class KeywordsComponent implements OnInit {
   keywords: Keyword[] = [];
+  smartKeywords: Keyword[] = [];
+  filteredSmartKeywords: Keyword[] = [];
 
   newKeyword = '';
 
@@ -24,14 +26,23 @@ export class KeywordsComponent implements OnInit {
   ngOnInit(): void {
     this.route.parent?.data.subscribe((data) => {
       this.keywords = data.keywords;
+      this.smartKeywords = data.smartKeywords;
+      this.filterSmartKeywords();
     });
+    this.keywordService.getSmartKeywords().subscribe();
   }
 
-  addKeyword(): void {
-    if (this.newKeyword.trim() === '') {
+  filterSmartKeywords(): void {
+    this.filteredSmartKeywords = this.smartKeywords.filter(
+      (sk) => this.keywords.findIndex((k) => k.keyword === sk.keyword) === -1
+    );
+  }
+
+  addKeyword(keyword: string): void {
+    if (keyword.trim() === '') {
       return;
     }
-    this.keywordService.putKeyword(this.newKeyword).subscribe((res) => {
+    this.keywordService.putKeyword(keyword).subscribe((res) => {
       if (!res.success) {
         this.modalService.showModal(
           '키워드 구독 실패',
@@ -48,8 +59,8 @@ export class KeywordsComponent implements OnInit {
         );
       }
       this.keywords = res.keywords;
+      this.filterSmartKeywords();
     });
-    this.newKeyword = '';
   }
 
   removeKeyword(keyword: string): void {
@@ -73,11 +84,12 @@ export class KeywordsComponent implements OnInit {
         );
       }
       this.keywords = res.keywords;
+      this.filterSmartKeywords();
     });
   }
 
   showDeleteModal(id: number): void {
-    const keyword = this.keywords.find((k) => k.id === id)?.value;
+    const keyword = this.keywords.find((k) => k.id === id)?.keyword;
     if (keyword) {
       this.modalService.showModal(
         '키워드 구독 해제',
@@ -99,6 +111,34 @@ export class KeywordsComponent implements OnInit {
           },
         ],
         `키워드 \'${keyword}\'에 대한 구독을 해제 하시겠습니까?`
+      );
+    }
+  }
+
+  showAddSmartKeywordModal(id: number): void {
+    const keyword = this.filteredSmartKeywords.find((k) => k.id === id)
+      ?.keyword;
+    if (keyword) {
+      this.modalService.showModal(
+        '스마트 키워드 구독',
+        [
+          {
+            text: '구독',
+            context: 'primary',
+            handler: () => {
+              this.addKeyword(keyword);
+              this.modalService.closeModal();
+            },
+          },
+          {
+            text: '취소',
+            context: 'secondary',
+            handler: () => {
+              this.modalService.closeModal();
+            },
+          },
+        ],
+        `스마트 키워드 \'${keyword}\'를 구독 하시겠습니까?`
       );
     }
   }

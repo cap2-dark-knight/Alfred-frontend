@@ -15,7 +15,7 @@
           <a class="nav-link" routerLink="./keywords" routerLinkActive="active">키워드</a>
         </li>
       </ul>
-      <div class="ml-auto">
+      <div class="ml-auto d-flex flex-row align-items-center">
         <span class="welcome">반갑습니다, {{ user?.first_name }}님</span>
         <fa-icon icon="sign-out-alt" (click)="onLogout()" class="logout"></fa-icon>
       </div>

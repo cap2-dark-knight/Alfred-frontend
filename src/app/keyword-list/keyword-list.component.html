@@ -1,3 +1,4 @@
-<div *ngFor="let kw of keywords" class="rounded-pill keyword" [ngClass]="bgClass" (click)="onClick(kw.id)">
-  {{ kw.value }}
+<div *ngFor="let kw of keywords" class="rounded-pill keyword" [ngClass]="{'smart': isSmartKeyword(kw)}"
+  (click)="onClick(kw.id)">
+  {{ kw.keyword }}
 </div>

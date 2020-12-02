@@ -12,6 +12,7 @@ import { LoggedInGuard } from './logged-in.guard';
 import { UserResolver } from './user.resolver';
 import { NewsResolver } from './news.resolver';
 import { KeywordsResolver } from './keywords.resolver';
+import { SmartKeywordsResolver } from './smart-keywords.resolver';
 
 const routes: Routes = [
   {
@@ -21,6 +22,7 @@ const routes: Routes = [
       user: UserResolver,
       news: NewsResolver,
       keywords: KeywordsResolver,
+      smartKeywords: SmartKeywordsResolver,
     },
     component: BaseComponent,
     children: [

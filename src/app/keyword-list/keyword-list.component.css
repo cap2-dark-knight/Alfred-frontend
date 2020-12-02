@@ -9,4 +9,14 @@
   margin: 0 0.5rem 0.75rem 0;
   font-weight: 700;
   cursor: pointer;
+  background-color: #81b29a;
+  opacity: 85%;
+}
+
+.keyword.smart {
+  background-color: #e9c46a;
+}
+
+.keyword:hover {
+  opacity: 100%;
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { NEVER, Observable, of, throwError } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 
 import { Keyword } from 'src/models/keyword';
@@ -9,20 +9,25 @@ import { Keyword } from 'src/models/keyword';
   providedIn: 'root',
 })
 export class KeywordService {
-  myKeywords: Keyword[] = [];
-
   constructor(private http: HttpClient) {}
 
   getMyKeywords(): Observable<Keyword[]> {
     const URL = '/common/keyword';
+    return this.http.get<{ keywords: Keyword[] }>(URL).pipe(
+      // tap((res) => console.log(res)),
+      catchError((err) => throwError(err)),
+      map((res) => res.keywords)
+    );
+  }
+
+  getSmartKeywords(): Observable<Keyword[]> {
+    const URL = '/common/keyword/smart';
     return this.http
-      .get<{ keywords: { id: number; keyword: string }[] }>(URL)
+      .get<{ result: 'success' | 'fail'; smartkeywords: Keyword[] }>(URL)
       .pipe(
         // tap((res) => console.log(res)),
         catchError((err) => throwError(err)),
-        map((res) =>
-          res.keywords.map((k) => Object.create({ id: k.id, value: k.keyword }))
-        )
+        map((res) => res.smartkeywords)
       );
   }
 
@@ -34,7 +39,7 @@ export class KeywordService {
       .put<{
         result: string;
         info: string;
-        keywords: { id: number; keyword: string }[];
+        keywords: Keyword[];
       }>(URL, {})
       .pipe(
         // tap((res) => console.log(res)),
@@ -42,9 +47,7 @@ export class KeywordService {
         map((res) =>
           Object.create({
             success: res.result === 'success',
-            keywords: res.keywords.map((k) =>
-              Object.create({ id: k.id, value: k.keyword })
-            ),
+            keywords: res.keywords,
           })
         )
       );
@@ -58,7 +61,7 @@ export class KeywordService {
       .delete<{
         result: string;
         info: string;
-        keywords: { id: number; keyword: string }[];
+        keywords: Keyword[];
       }>(URL, {})
       .pipe(
         // tap((res) => console.log(res)),
@@ -66,9 +69,7 @@ export class KeywordService {
         map((res) =>
           Object.create({
             success: res.result === 'success',
-            keywords: res.keywords.map((k) =>
-              Object.create({ id: k.id, value: k.keyword })
-            ),
+            keywords: res.keywords,
           })
         )
       );
