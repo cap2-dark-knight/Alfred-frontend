@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
-import { NewsService } from '../news.service';
 import { News } from 'src/models/news';
 import { Keyword } from 'src/models/keyword';
-import { KeywordService } from '../keyword.service';
 
 @Component({
   selector: 'app-news',
@@ -16,19 +15,14 @@ export class NewsComponent implements OnInit {
   selectedKeyword: Keyword | undefined;
   selectedNews: News[] = [];
 
-  constructor(
-    private newsService: NewsService,
-    private keywordService: KeywordService
-  ) {}
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.newsService.getNews().subscribe((res) => {
-      this.news = res;
-      this.selectedNews = this.news;
+    this.route.parent?.data.subscribe((data) => {
+      this.keywords = data.keywords;
+      this.news = data.news;
+      this.selectedNews = data.news;
     });
-    this.keywordService
-      .getMyKeywords()
-      .subscribe((res) => (this.keywords = res));
   }
 
   onKeywordSelect(id: number): void {

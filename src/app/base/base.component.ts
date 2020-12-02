@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { AuthService } from '../auth.service';
 import { ModalService } from '../modal.service';
+import { User } from 'src/models/user';
 
 @Component({
   selector: 'app-base',
@@ -10,13 +11,20 @@ import { ModalService } from '../modal.service';
   styleUrls: ['./base.component.css'],
 })
 export class BaseComponent implements OnInit {
+  user: User | undefined;
+
   constructor(
+    private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
     private modalService: ModalService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.route.data.subscribe((data) => {
+      this.user = data.user;
+    });
+  }
 
   onLogout(): void {
     this.modalService.showModal(

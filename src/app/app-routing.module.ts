@@ -9,11 +9,19 @@ import { LoginBaseComponent } from './login-base/login-base.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { LoginGuard } from './login.guard';
 import { LoggedInGuard } from './logged-in.guard';
+import { UserResolver } from './user.resolver';
+import { NewsResolver } from './news.resolver';
+import { KeywordsResolver } from './keywords.resolver';
 
 const routes: Routes = [
   {
     path: 'app',
     canActivate: [LoginGuard],
+    resolve: {
+      user: UserResolver,
+      news: NewsResolver,
+      keywords: KeywordsResolver,
+    },
     component: BaseComponent,
     children: [
       {

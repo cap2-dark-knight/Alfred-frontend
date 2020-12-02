@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { Keyword } from 'src/models/keyword';
 import { KeywordService } from '../keyword.service';
@@ -15,14 +16,15 @@ export class KeywordsComponent implements OnInit {
   newKeyword = '';
 
   constructor(
+    private route: ActivatedRoute,
     private keywordService: KeywordService,
     private modalService: ModalService
   ) {}
 
   ngOnInit(): void {
-    this.keywordService
-      .getMyKeywords()
-      .subscribe((res) => (this.keywords = res));
+    this.route.parent?.data.subscribe((data) => {
+      this.keywords = data.keywords;
+    });
   }
 
   addKeyword(): void {
