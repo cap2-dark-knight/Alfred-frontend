@@ -8,8 +8,6 @@ import {
   FaIconLibrary,
 } from '@fortawesome/angular-fontawesome';
 import { fas } from '@fortawesome/free-solid-svg-icons';
-import { far } from '@fortawesome/free-regular-svg-icons';
-import { fab } from '@fortawesome/free-brands-svg-icons';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -55,6 +53,6 @@ import { NewsListComponent } from './news-list/news-list.component';
 })
 export class AppModule {
   constructor(library: FaIconLibrary) {
-    library.addIconPacks(fas, far, fab);
+    library.addIconPacks(fas);
   }
 }
