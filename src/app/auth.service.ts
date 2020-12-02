@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { User } from 'src/models/user';
@@ -9,14 +9,19 @@ import { User } from 'src/models/user';
   providedIn: 'root',
 })
 export class AuthService {
+  user: User | undefined;
+
   constructor(private http: HttpClient) {}
 
   getUser(): Observable<User> {
+    if (this.user) {
+      return of(this.user);
+    }
     const URL = '/common/accounts/user';
     return this.http.get<{ result: 'success' | 'fail'; user: User }>(URL).pipe(
       // tap((res) => console.log(res)),
       catchError((err) => throwError(err)),
-      map((res) => res.user)
+      map((res) => (this.user = res.user))
     );
   }
 
@@ -32,6 +37,7 @@ export class AuthService {
   }
 
   getLogout(): Observable<boolean> {
+    this.user = undefined;
     const URL = '/common/accounts/signout';
     return this.http.get<{ result: 'success' | 'fail' }>(URL).pipe(
       // tap((res) => console.log(res)),

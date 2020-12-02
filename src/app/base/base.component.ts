@@ -20,10 +20,10 @@ export class BaseComponent implements OnInit {
 
   onLogout(): void {
     this.modalService.showModal(
-      'Log out',
+      '로그아웃',
       [
         {
-          text: 'Yes',
+          text: '예',
           context: 'primary',
           handler: () => {
             this.logout();
@@ -31,14 +31,14 @@ export class BaseComponent implements OnInit {
           },
         },
         {
-          text: 'No',
+          text: '아니오',
           context: 'secondary',
           handler: () => {
             this.modalService.closeModal();
           },
         },
       ],
-      'Would you like to log out from Alfred?'
+      'Alfred로부터 로그아웃 하시겠습니까?'
     );
   }
 
@@ -47,9 +47,9 @@ export class BaseComponent implements OnInit {
       if (res) {
         this.router.navigate(['/login']);
       } else {
-        this.modalService.showModal('Logout failed', [
+        this.modalService.showModal('로그아웃 실패', [
           {
-            text: 'Close',
+            text: '닫기',
             context: 'secondary',
             handler: () => {
               this.modalService.closeModal();

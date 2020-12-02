@@ -1,22 +1,22 @@
-<h2>Add a keyword</h2>
+<h2>키워드 구독</h2>
 <form (ngSubmit)="addKeyword()">
   <div class="form-row align-items-center">
     <div class="col-auto">
       <input type="text" [(ngModel)]="newKeyword" name="new-keyword" class="form-control" placeholder="Riptide">
     </div>
     <div class="col-auto">
-      <button type="submit" class="btn btn-primary">Add</button>
+      <button type="submit" class="btn btn-primary">추가</button>
     </div>
   </div>
 </form>
 
 <ng-container *ngIf="keywords">
-  <h2>My keywords</h2>
+  <h2>구독 중인 키워드</h2>
   <app-keyword-list [keywords]="keywords" (keywordClick)="showDeleteModal($event)" bgClass="bg-info">
   </app-keyword-list>
 </ng-container>
 
-<h2>Notification frequency setting</h2>
+<h2>구독 알림 주기</h2>
 <select id="Notification" name="Notification">
   <option value="30min">30m</option>
   <option value="1h">1h</option>

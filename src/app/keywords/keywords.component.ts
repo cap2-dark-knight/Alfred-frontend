@@ -32,17 +32,17 @@ export class KeywordsComponent implements OnInit {
     this.keywordService.putKeyword(this.newKeyword).subscribe((res) => {
       if (!res.success) {
         this.modalService.showModal(
-          'Failed to add keyword',
+          '키워드 구독 실패',
           [
             {
-              text: 'Close',
+              text: '닫기',
               context: 'secondary',
               handler: () => {
                 this.modalService.closeModal();
               },
             },
           ],
-          'Keyword is already added.'
+          '이미 구독한 키워드입니다.'
         );
       }
       this.keywords = res.keywords;
@@ -57,17 +57,17 @@ export class KeywordsComponent implements OnInit {
     this.keywordService.deleteKeyword(keyword).subscribe((res) => {
       if (!res.success) {
         this.modalService.showModal(
-          'Failed to delete keyword',
+          '키워드 구독 헤제 실패',
           [
             {
-              text: 'Close',
+              text: '닫기',
               context: 'secondary',
               handler: () => {
                 this.modalService.closeModal();
               },
             },
           ],
-          'Keyword does not exist.'
+          '구독 중이지 않는 키워드입니다.'
         );
       }
       this.keywords = res.keywords;
@@ -78,10 +78,10 @@ export class KeywordsComponent implements OnInit {
     const keyword = this.keywords.find((k) => k.id === id)?.value;
     if (keyword) {
       this.modalService.showModal(
-        'Remove keyword',
+        '키워드 구독 해제',
         [
           {
-            text: 'Remove',
+            text: '구독 해제',
             context: 'danger',
             handler: () => {
               this.removeKeyword(keyword);
@@ -89,14 +89,14 @@ export class KeywordsComponent implements OnInit {
             },
           },
           {
-            text: 'Cancel',
+            text: '취소',
             context: 'secondary',
             handler: () => {
               this.modalService.closeModal();
             },
           },
         ],
-        `Would you like to remove the keyword \'${keyword}\' from your subscription?`
+        `키워드 \'${keyword}\'에 대한 구독을 해제 하시겠습니까?`
       );
     }
   }

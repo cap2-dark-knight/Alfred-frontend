@@ -1,8 +1,8 @@
 <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="d-flex flex-column">
-  <input type="email" name="email" autocomplete="email" formControlName="email" class="form-control"
-    placeholder="Email" required autofocus>
+  <input type="email" name="email" autocomplete="email" formControlName="email" class="form-control" placeholder="이메일"
+    required autofocus>
   <input type="password" name="password" autocomplete="current-password" formControlName="password" class="form-control"
-    placeholder="Password" required>
-  <button type="submit" class="btn btn-primary">Login</button>
-  <a class="text-decoration-none font-weight-bold mt-2" routerLink="register">Register</a>
+    placeholder="비밀번호" required>
+  <button type="submit" class="btn btn-primary">로그인</button>
+  <a class="text-decoration-none font-weight-bold mt-2" routerLink="register">회원가입</a>
 </form>

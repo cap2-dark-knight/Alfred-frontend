@@ -1,9 +1,9 @@
 <ng-container *ngIf="keywords">
-    <h2>Select a keyword</h2>
+    <h2>구독 중인 키워드</h2>
     <app-keyword-list [keywords]="keywords" (keywordClick)="onKeywordSelect($event)" bgClass="bg-info">
     </app-keyword-list>
 </ng-container>
 
-<h2 *ngIf="selectedKeyword">News from keyword {{selectedKeyword?.value}}</h2>
-<h2 *ngIf="!selectedKeyword">News from all keywords</h2>
+<h2 *ngIf="selectedKeyword">키워드 '{{selectedKeyword?.value}}'와 관련된 기사</h2>
+<h2 *ngIf="!selectedKeyword">모든 키워드에 대한 기사</h2>
 <app-news-list [news]="selectedNews"></app-news-list>

@@ -62,9 +62,9 @@ export class RegisterFormComponent implements OnInit {
         if (res) {
           this.router.navigate(['/app']);
         } else {
-          this.modalService.showModal('Registeration failed', [
+          this.modalService.showModal('회원가입 실패', [
             {
-              text: 'Close',
+              text: '취소',
               context: 'secondary',
               handler: () => {
                 this.modalService.closeModal();

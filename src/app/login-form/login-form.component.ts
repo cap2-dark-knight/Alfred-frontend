@@ -40,9 +40,9 @@ export class LoginFormComponent implements OnInit {
       if (res) {
         this.router.navigate(['/app']);
       } else {
-        this.modalService.showModal('Login failed', [
+        this.modalService.showModal('로그인 실패', [
           {
-            text: 'Close',
+            text: '닫기',
             context: 'secondary',
             handler: () => {
               this.modalService.closeModal();
