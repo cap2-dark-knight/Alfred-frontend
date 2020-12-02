@@ -11,8 +11,11 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     if (!this.hasCSRFCookie()) {
-      const URL = '/common/accounts/signin';
-      this.http.get(URL).subscribe(() => console.log('Retreived CSRF token'));
+      const URL = '/common';
+      const subscription = this.http.get(URL).subscribe(() => {
+        console.log('Retreived CSRF token');
+        subscription.unsubscribe();
+      });
     }
   }
 
