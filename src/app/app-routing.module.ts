@@ -5,9 +5,9 @@ import { BaseComponent } from './base/base.component';
 import { KeywordsResolver } from './keywords.resolver';
 import { KeywordsComponent } from './keywords/keywords.component';
 import { LoggedInGuard } from './logged-in.guard';
+import { LoggedOutGuard } from './logged-out.guard';
 import { LoginBaseComponent } from './login-base/login-base.component';
 import { LoginFormComponent } from './login-form/login-form.component';
-import { LoginGuard } from './login.guard';
 import { NewsResolver } from './news.resolver';
 import { NewsComponent } from './news/news.component';
 import { RegisterFormComponent } from './register-form/register-form.component';
@@ -17,13 +17,14 @@ import { UserResolver } from './user.resolver';
 const routes: Routes = [
   {
     path: 'app',
-    canActivate: [LoginGuard],
+    canActivate: [LoggedInGuard],
     resolve: {
       user: UserResolver,
       news: NewsResolver,
       keywords: KeywordsResolver,
       smartKeywords: SmartKeywordsResolver,
     },
+    runGuardsAndResolvers: 'always',
     component: BaseComponent,
     children: [
       {
@@ -43,7 +44,8 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    canActivate: [LoggedInGuard],
+    canActivate: [LoggedOutGuard],
+    runGuardsAndResolvers: 'always',
     component: LoginBaseComponent,
     children: [
       {

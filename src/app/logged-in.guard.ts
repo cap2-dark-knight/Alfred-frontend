@@ -24,8 +24,8 @@ export class LoggedInGuard implements CanActivate {
       catchError((err) => of(undefined)),
       // tap((res) => console.log(res)),
       map((res) => {
-        if (res) {
-          this.router.navigate(['/app']);
+        if (!res) {
+          this.router.navigate(['/login']);
           return false;
         }
         return true;

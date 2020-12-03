@@ -13,7 +13,7 @@ import { AuthService } from './auth.service';
 @Injectable({
   providedIn: 'root',
 })
-export class LoginGuard implements CanActivate {
+export class LoggedOutGuard implements CanActivate {
   constructor(private router: Router, private authService: AuthService) {}
 
   canActivate(
@@ -24,8 +24,8 @@ export class LoginGuard implements CanActivate {
       catchError((err) => of(undefined)),
       // tap((res) => console.log(res)),
       map((res) => {
-        if (!res) {
-          this.router.navigate(['/login']);
+        if (res) {
+          this.router.navigate(['/app']);
           return false;
         }
         return true;
