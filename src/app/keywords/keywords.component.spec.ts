@@ -1,5 +1,9 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
 
+import { KeywordListComponent } from '../keyword-list/keyword-list.component';
 import { KeywordsComponent } from './keywords.component';
 
 describe('KeywordsComponent', () => {
@@ -8,7 +12,8 @@ describe('KeywordsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [KeywordsComponent],
+      declarations: [KeywordsComponent, KeywordListComponent],
+      imports: [RouterTestingModule, HttpClientTestingModule, FormsModule],
     }).compileComponents();
   });
 

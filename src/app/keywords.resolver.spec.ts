@@ -1,3 +1,4 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 
 import { KeywordsResolver } from './keywords.resolver';
@@ -6,7 +7,9 @@ describe('KeywordsResolver', () => {
   let resolver: KeywordsResolver;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+    });
     resolver = TestBed.inject(KeywordsResolver);
   });
 
