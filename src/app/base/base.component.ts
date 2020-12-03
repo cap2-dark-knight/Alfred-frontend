@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
+import { User } from 'src/models/user';
 import { AuthService } from '../auth.service';
 import { ModalService } from '../modal.service';
-import { User } from 'src/models/user';
 
 @Component({
   selector: 'app-base',

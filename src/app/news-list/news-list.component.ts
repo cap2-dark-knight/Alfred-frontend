@@ -1,4 +1,4 @@
-import { Component, HostBinding, OnInit, Input } from '@angular/core';
+import { Component, HostBinding, Input, OnInit } from '@angular/core';
 
 import { News } from 'src/models/news';
 
