@@ -59,6 +59,7 @@ export class KeywordsComponent implements OnInit {
         );
       }
       this.keywords = res.keywords;
+      this.newKeyword = '';
       this.filterSmartKeywords();
     });
   }
