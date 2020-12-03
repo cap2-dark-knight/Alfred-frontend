@@ -1,5 +1,8 @@
 <form [formGroup]="registerForm" (ngSubmit)="onJoin()" class="d-flex flex-column">
-  <input type="text" name="name" formControlName="name" class="form-control" placeholder="이름" required autofocus>
+  <input type="text" name="lname" formControlName="lastName" autocomplete="family-name" class="form-control"
+    placeholder="홍" required autofocus>
+  <input type="text" name="fname" formControlName="firstName" autocomplete="given-name" class="form-control"
+    placeholder="길동" required>
   <input type="email" name="email" formControlName="email" class="form-control" placeholder="이메일" required>
   <input type="password" name="password" formControlName="password" autocomplete="new-password" class="form-control"
     placeholder="비밀번호" required>

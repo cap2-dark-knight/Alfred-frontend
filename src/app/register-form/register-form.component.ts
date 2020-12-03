@@ -12,7 +12,11 @@ import { ModalService } from '../modal.service';
 })
 export class RegisterFormComponent implements OnInit {
   registerForm: FormGroup = new FormGroup({
-    name: new FormControl('', {
+    lastName: new FormControl('', {
+      validators: [Validators.required],
+      updateOn: 'submit',
+    }),
+    firstName: new FormControl('', {
       validators: [Validators.required],
       updateOn: 'submit',
     }),
@@ -43,13 +47,8 @@ export class RegisterFormComponent implements OnInit {
       return;
     }
 
-    const name: string = this.registerForm.get('name')?.value;
-    const names = name.split(' ');
-    let firstName = names[0];
-    for (let i = 1; i < names.length - 1; i++) {
-      firstName = `${firstName} ${names[i]}`;
-    }
-    const lastName = names.length > 1 ? names[names.length - 1] : '';
+    const lastName: string = this.registerForm.get('lastName')?.value;
+    const firstName: string = this.registerForm.get('firstName')?.value;
     const email: string = this.registerForm.get('email')?.value;
     const password: string = this.registerForm.get('password')?.value;
     const passwordVerif: string = this.registerForm.get('passwordVerif')?.value;
