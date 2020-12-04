@@ -46,9 +46,39 @@ export class AlertTimesFormComponent implements OnInit {
       }
     });
 
+    if (newAlertTimes.length === 0) {
+      this.modalService.showModal(
+        '구독 알림 시간 저장 실패',
+        [
+          {
+            text: '닫기',
+            context: 'secondary',
+            handler: () => {
+              this.modalService.closeModal();
+            },
+          },
+        ],
+        '1개 이상의 알림 시간을 선택해야 합니다.'
+      );
+      return;
+    }
+
     this.userService.postAlertTimes(newAlertTimes).subscribe((res) => {
       if (res.result && Array.isArray(res.alertTimes)) {
         this.alertTimes = res.alertTimes;
+        this.modalService.showModal(
+          '구독 알림 시간 변경',
+          [
+            {
+              text: '닫기',
+              context: 'secondary',
+              handler: () => {
+                this.modalService.closeModal();
+              },
+            },
+          ],
+          '알림 시간이 변경되었습니다.'
+        );
       } else {
         this.modalService.showModal(
           '구독 알림 시간 저장 실패',
