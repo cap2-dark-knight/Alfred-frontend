@@ -15,7 +15,7 @@ export class KeywordsComponent implements OnInit {
   keywords: Keyword[] = [];
   smartKeywords: Keyword[] = [];
   filteredSmartKeywords: Keyword[] = [];
-  alertTimes: User['alart_times'] = [];
+  alertTimes: User['alert_times'] = [];
   alertTimesCollapsed = true;
 
   newKeyword = '';
@@ -30,7 +30,7 @@ export class KeywordsComponent implements OnInit {
     this.route.parent?.data.subscribe((data) => {
       this.keywords = data.keywords;
       this.smartKeywords = data.smartKeywords;
-      this.alertTimes = data.user.alart_times;
+      this.alertTimes = data.alertTimes;
       this.filterSmartKeywords();
     });
     this.keywordService.getSmartKeywords().subscribe();

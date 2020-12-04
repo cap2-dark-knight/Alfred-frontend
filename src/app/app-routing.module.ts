@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { AlertTimesResolver } from './alert-times.resolver';
 import { BaseComponent } from './base/base.component';
 import { KeywordsResolver } from './keywords.resolver';
 import { KeywordsComponent } from './keywords/keywords.component';
@@ -23,6 +24,7 @@ const routes: Routes = [
       news: NewsResolver,
       keywords: KeywordsResolver,
       smartKeywords: SmartKeywordsResolver,
+      alertTimes: AlertTimesResolver,
     },
     runGuardsAndResolvers: 'always',
     component: BaseComponent,

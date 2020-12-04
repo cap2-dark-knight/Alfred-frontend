@@ -1,1 +1,12 @@
-<p>alert-times-form works!</p>
+<form [formGroup]="timesForm" class="container" (ngSubmit)="onSave()">
+  <div formArrayName="times" class="row row-cols-1 row-cols-sm-4 row-cols-md-6 mb-3">
+    <div *ngFor="let time of timesArray.controls; index as i" class="col form-check mb-2">
+      <input [formControlName]="i" name="time-{{ i }}" value="{{i}}" [checked]="time.value" class="form-check-input"
+        type="checkbox" id="time-{{ i }}">
+      <label class="form-check-label" for="time-{{ i }}">{{ i }} 시</label>
+    </div>
+  </div>
+  <div class="row">
+    <button type="submit" class="btn btn-primary">저장</button>
+  </div>
+</form>

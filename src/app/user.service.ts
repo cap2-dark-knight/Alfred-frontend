@@ -37,4 +37,41 @@ export class UserService {
       map((res) => res.result === 'success')
     );
   }
+
+  getAlertTimes(): Observable<User['alert_times']> {
+    const URL = '/common/alert_time';
+    return this.http.get<{ alert_times: User['alert_times'] }>(URL).pipe(
+      // tap((res) => console.log(res)),
+      catchError((err) => throwError(err)),
+      map((res) => res.alert_times)
+    );
+  }
+
+  postAlertTimes(
+    alertTimes: User['alert_times']
+  ): Observable<{
+    result: boolean;
+    alertTimes?: User['alert_times'];
+  }> {
+    const URL = '/common/alert_time';
+    return this.http
+      .post<{
+        result: 'success' | 'fail';
+        alert_times?: User['alert_times'];
+        info?: string;
+      }>(URL, { alert_times: alertTimes })
+      .pipe(
+        // tap((res) => console.log(res)),
+        catchError((err) => {
+          throwError(err);
+          return of({ result: 'fail', alert_times: [] });
+        }),
+        map((res) =>
+          Object.create({
+            result: res.result === 'success',
+            alertTimes: res.alert_times,
+          })
+        )
+      );
+  }
 }

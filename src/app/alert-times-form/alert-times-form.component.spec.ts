@@ -1,4 +1,6 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AlertTimesFormComponent } from './alert-times-form.component';
 
@@ -9,6 +11,7 @@ describe('AlertTimesFormComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [AlertTimesFormComponent],
+      imports: [ReactiveFormsModule, HttpClientTestingModule],
     }).compileComponents();
   });
 
