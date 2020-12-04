@@ -12,13 +12,13 @@ import { AuthService } from './auth.service';
 @Injectable({
   providedIn: 'root',
 })
-export class UserResolver implements Resolve<User> {
+export class UserResolver implements Resolve<User | undefined> {
   constructor(private authService: AuthService) {}
 
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): Observable<User> {
+  ): Observable<User | undefined> {
     return this.authService.getUser();
   }
 }

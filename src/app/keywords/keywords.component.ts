@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Keyword } from 'src/models/keyword';
+import { User } from 'src/models/user';
 import { KeywordService } from '../keyword.service';
 import { ModalService } from '../modal.service';
 
@@ -14,6 +15,8 @@ export class KeywordsComponent implements OnInit {
   keywords: Keyword[] = [];
   smartKeywords: Keyword[] = [];
   filteredSmartKeywords: Keyword[] = [];
+  alertTimes: User['alart_times'] = [];
+  alertTimesCollapsed = true;
 
   newKeyword = '';
 
@@ -27,6 +30,7 @@ export class KeywordsComponent implements OnInit {
     this.route.parent?.data.subscribe((data) => {
       this.keywords = data.keywords;
       this.smartKeywords = data.smartKeywords;
+      this.alertTimes = data.user.alart_times;
       this.filterSmartKeywords();
     });
     this.keywordService.getSmartKeywords().subscribe();

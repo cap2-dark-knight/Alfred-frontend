@@ -5,8 +5,8 @@ import {
   Router,
   RouterStateSnapshot,
 } from '@angular/router';
-import { Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 
 import { AuthService } from './auth.service';
 
@@ -21,7 +21,6 @@ export class LoggedInGuard implements CanActivate {
     state: RouterStateSnapshot
   ): Observable<boolean> {
     return this.authService.getUser().pipe(
-      catchError((err) => of(undefined)),
       // tap((res) => console.log(res)),
       map((res) => {
         if (!res) {

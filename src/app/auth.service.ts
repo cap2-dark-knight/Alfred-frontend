@@ -13,15 +13,18 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  getUser(): Observable<User> {
+  getUser(): Observable<User | undefined> {
     if (this.user) {
       return of(this.user);
     }
     const URL = '/common/accounts/user';
     return this.http.get<{ result: 'success' | 'fail'; user: User }>(URL).pipe(
       // tap((res) => console.log(res)),
-      catchError((err) => throwError(err)),
-      map((res) => (this.user = res.user))
+      catchError((err) => {
+        throwError(err);
+        return of(undefined);
+      }),
+      map((res) => (this.user = res ? res.user : undefined))
     );
   }
 

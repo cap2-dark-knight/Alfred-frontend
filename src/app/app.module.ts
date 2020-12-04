@@ -9,8 +9,9 @@ import {
   FontAwesomeModule,
 } from '@fortawesome/angular-fontawesome';
 import { fas } from '@fortawesome/free-solid-svg-icons';
-import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCollapseModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
+import { AlertTimesFormComponent } from './alert-times-form/alert-times-form.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BaseComponent } from './base/base.component';
@@ -35,10 +36,12 @@ import { RegisterFormComponent } from './register-form/register-form.component';
     LoginFormComponent,
     ModalComponent,
     NewsListComponent,
+    AlertTimesFormComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    NgbCollapseModule,
     NgbModalModule,
     FormsModule,
     HttpClientModule,
