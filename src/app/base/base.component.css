@@ -22,6 +22,10 @@
   padding-right: 3rem;
 }
 
+.navbar-brand img {
+  height: 3rem;
+}
+
 .nav-item {
   padding-right: 2rem;
   font-size: 1.5rem;
