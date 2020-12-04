@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { User } from 'src/models/user';
-import { AuthService } from '../auth.service';
 import { ModalService } from '../modal.service';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-base',
@@ -16,7 +16,7 @@ export class BaseComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private authService: AuthService,
+    private userService: UserService,
     private modalService: ModalService
   ) {}
 
@@ -51,7 +51,7 @@ export class BaseComponent implements OnInit {
   }
 
   logout(): void {
-    this.authService.getLogout().subscribe((res) => {
+    this.userService.getLogout().subscribe((res) => {
       if (res) {
         this.router.navigate(['/login']);
       } else {

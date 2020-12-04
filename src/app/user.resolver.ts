@@ -7,18 +7,18 @@ import {
 import { Observable } from 'rxjs';
 
 import { User } from 'src/models/user';
-import { AuthService } from './auth.service';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserResolver implements Resolve<User | undefined> {
-  constructor(private authService: AuthService) {}
+  constructor(private userService: UserService) {}
 
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<User | undefined> {
-    return this.authService.getUser();
+    return this.userService.getUser();
   }
 }
