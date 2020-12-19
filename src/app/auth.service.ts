@@ -3,14 +3,18 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
+import { environment } from 'src/environments/environment';
+
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+  proxy: string = environment.production ? environment.apiUrl : '';
+
   constructor(private http: HttpClient) {}
 
   postLogin(email: string, password: string): Observable<boolean> {
-    const URL = '/common/accounts/signin';
+    const URL = this.proxy + '/common/accounts/signin';
     return this.http
       .post<{ result: 'success' | 'fail' }>(URL, { email, password })
       .pipe(
@@ -26,7 +30,7 @@ export class AuthService {
     lastName: string,
     password: string
   ): Observable<boolean> {
-    const URL = '/common/accounts/signup';
+    const URL = this.proxy + '/common/accounts/signup';
     return this.http
       .post<{ result: 'success' | 'fail'; info?: string }>(URL, {
         email,

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
+import { environment } from 'src/environments/environment';
 import { User } from 'src/models/user';
 
 @Injectable({
@@ -10,6 +11,7 @@ import { User } from 'src/models/user';
 })
 export class UserService {
   user: User | undefined;
+  proxy: string = environment.production ? environment.apiUrl : '';
 
   constructor(private http: HttpClient) {}
 
@@ -17,7 +19,7 @@ export class UserService {
     if (this.user) {
       return of(this.user);
     }
-    const URL = '/common/accounts/user';
+    const URL = this.proxy + '/common/accounts/user';
     return this.http.get<{ result: 'success' | 'fail'; user: User }>(URL).pipe(
       // tap((res) => console.log(res)),
       catchError((err) => {
@@ -30,7 +32,7 @@ export class UserService {
 
   getLogout(): Observable<boolean> {
     this.user = undefined;
-    const URL = '/common/accounts/signout';
+    const URL = this.proxy + '/common/accounts/signout';
     return this.http.get<{ result: 'success' | 'fail' }>(URL).pipe(
       // tap((res) => console.log(res)),
       catchError((err) => throwError(err)),
@@ -39,7 +41,7 @@ export class UserService {
   }
 
   getAlertTimes(): Observable<User['alert_times']> {
-    const URL = '/common/alert_time';
+    const URL = this.proxy + '/common/alert_time';
     return this.http.get<{ alert_times: User['alert_times'] }>(URL).pipe(
       // tap((res) => console.log(res)),
       catchError((err) => throwError(err)),
@@ -53,7 +55,7 @@ export class UserService {
     result: boolean;
     alertTimes?: User['alert_times'];
   }> {
-    const URL = '/common/alert_time';
+    const URL = this.proxy + '/common/alert_time';
     return this.http
       .post<{
         result: 'success' | 'fail';

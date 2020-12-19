@@ -3,16 +3,19 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
+import { environment } from 'src/environments/environment';
 import { Keyword } from 'src/models/keyword';
 
 @Injectable({
   providedIn: 'root',
 })
 export class KeywordService {
+  proxy: string = environment.production ? environment.apiUrl : '';
+
   constructor(private http: HttpClient) {}
 
   getMyKeywords(): Observable<Keyword[]> {
-    const URL = '/common/keyword';
+    const URL = this.proxy + '/common/keyword';
     return this.http.get<{ keywords: Keyword[] }>(URL).pipe(
       // tap((res) => console.log(res)),
       catchError((err) => throwError(err)),
@@ -21,7 +24,7 @@ export class KeywordService {
   }
 
   getSmartKeywords(): Observable<Keyword[]> {
-    const URL = '/common/keyword/smart';
+    const URL = this.proxy + '/common/keyword/smart';
     return this.http
       .get<{ result: 'success' | 'fail'; smartkeywords: Keyword[] }>(URL)
       .pipe(
@@ -34,7 +37,7 @@ export class KeywordService {
   putKeyword(
     keyword: string
   ): Observable<{ success: true; keywords: Keyword[] }> {
-    const URL = `/common/keyword/${keyword}/update`;
+    const URL = this.proxy + `/common/keyword/${keyword}/update`;
     return this.http
       .put<{
         result: string;
@@ -56,7 +59,7 @@ export class KeywordService {
   deleteKeyword(
     keyword: string
   ): Observable<{ success: true; keywords: Keyword[] }> {
-    const URL = `/common/keyword/${keyword}/delete`;
+    const URL = this.proxy + `/common/keyword/${keyword}/delete`;
     return this.http
       .delete<{
         result: string;
