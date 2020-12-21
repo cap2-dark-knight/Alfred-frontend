@@ -47,7 +47,7 @@ import { RegisterFormComponent } from './register-form/register-form.component';
     HttpClientModule,
     HttpClientXsrfModule.withOptions({
       cookieName: 'csrftoken',
-      headerName: 'X-CSRFToken',
+      headerName: 'X-CSRFTOKEN',
     }),
     ReactiveFormsModule,
     FontAwesomeModule,

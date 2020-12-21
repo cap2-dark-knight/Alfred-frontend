@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://fred.cf:8000',
+  apiUrl: 'https://fred.cf',
 };

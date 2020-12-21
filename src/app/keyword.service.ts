@@ -16,17 +16,21 @@ export class KeywordService {
 
   getMyKeywords(): Observable<Keyword[]> {
     const URL = this.proxy + '/common/keyword';
-    return this.http.get<{ keywords: Keyword[] }>(URL).pipe(
-      // tap((res) => console.log(res)),
-      catchError((err) => throwError(err)),
-      map((res) => res.keywords)
-    );
+    return this.http
+      .get<{ keywords: Keyword[] }>(URL, { withCredentials: true })
+      .pipe(
+        // tap((res) => console.log(res)),
+        catchError((err) => throwError(err)),
+        map((res) => res.keywords)
+      );
   }
 
   getSmartKeywords(): Observable<Keyword[]> {
     const URL = this.proxy + '/common/keyword/smart';
     return this.http
-      .get<{ result: 'success' | 'fail'; smartkeywords: Keyword[] }>(URL)
+      .get<{ result: 'success' | 'fail'; smartkeywords: Keyword[] }>(URL, {
+        withCredentials: true,
+      })
       .pipe(
         // tap((res) => console.log(res)),
         catchError((err) => throwError(err)),
@@ -43,7 +47,7 @@ export class KeywordService {
         result: string;
         info: string;
         keywords: Keyword[];
-      }>(URL, {})
+      }>(URL, {}, { withCredentials: true })
       .pipe(
         // tap((res) => console.log(res)),
         catchError((err) => throwError(err)),
@@ -65,7 +69,7 @@ export class KeywordService {
         result: string;
         info: string;
         keywords: Keyword[];
-      }>(URL, {})
+      }>(URL, { withCredentials: true })
       .pipe(
         // tap((res) => console.log(res)),
         catchError((err) => throwError(err)),

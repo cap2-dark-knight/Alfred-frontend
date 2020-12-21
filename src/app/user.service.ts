@@ -20,33 +20,41 @@ export class UserService {
       return of(this.user);
     }
     const URL = this.proxy + '/common/accounts/user';
-    return this.http.get<{ result: 'success' | 'fail'; user: User }>(URL).pipe(
-      // tap((res) => console.log(res)),
-      catchError((err) => {
-        throwError(err);
-        return of(undefined);
-      }),
-      map((res) => (this.user = res ? res.user : undefined))
-    );
+    return this.http
+      .get<{ result: 'success' | 'fail'; user: User }>(URL, {
+        withCredentials: true,
+      })
+      .pipe(
+        // tap((res) => console.log(res)),
+        catchError((err) => {
+          throwError(err);
+          return of(undefined);
+        }),
+        map((res) => (this.user = res ? res.user : undefined))
+      );
   }
 
   getLogout(): Observable<boolean> {
     this.user = undefined;
     const URL = this.proxy + '/common/accounts/signout';
-    return this.http.get<{ result: 'success' | 'fail' }>(URL).pipe(
-      // tap((res) => console.log(res)),
-      catchError((err) => throwError(err)),
-      map((res) => res.result === 'success')
-    );
+    return this.http
+      .get<{ result: 'success' | 'fail' }>(URL, { withCredentials: true })
+      .pipe(
+        // tap((res) => console.log(res)),
+        catchError((err) => throwError(err)),
+        map((res) => res.result === 'success')
+      );
   }
 
   getAlertTimes(): Observable<User['alert_times']> {
     const URL = this.proxy + '/common/alert_time';
-    return this.http.get<{ alert_times: User['alert_times'] }>(URL).pipe(
-      // tap((res) => console.log(res)),
-      catchError((err) => throwError(err)),
-      map((res) => res.alert_times)
-    );
+    return this.http
+      .get<{ alert_times: User['alert_times'] }>(URL, { withCredentials: true })
+      .pipe(
+        // tap((res) => console.log(res)),
+        catchError((err) => throwError(err)),
+        map((res) => res.alert_times)
+      );
   }
 
   postAlertTimes(
@@ -61,7 +69,7 @@ export class UserService {
         result: 'success' | 'fail';
         alert_times?: User['alert_times'];
         info?: string;
-      }>(URL, { alert_times: alertTimes })
+      }>(URL, { alert_times: alertTimes }, { withCredentials: true })
       .pipe(
         // tap((res) => console.log(res)),
         catchError((err) => {

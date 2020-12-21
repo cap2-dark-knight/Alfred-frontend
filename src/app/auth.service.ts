@@ -16,7 +16,11 @@ export class AuthService {
   postLogin(email: string, password: string): Observable<boolean> {
     const URL = this.proxy + '/common/accounts/signin';
     return this.http
-      .post<{ result: 'success' | 'fail' }>(URL, { email, password })
+      .post<{ result: 'success' | 'fail' }>(
+        URL,
+        { email, password },
+        { withCredentials: true }
+      )
       .pipe(
         // tap((res) => console.log(res)),
         catchError((err) => throwError(err)),
@@ -32,12 +36,16 @@ export class AuthService {
   ): Observable<boolean> {
     const URL = this.proxy + '/common/accounts/signup';
     return this.http
-      .post<{ result: 'success' | 'fail'; info?: string }>(URL, {
-        email,
-        first_name: firstName,
-        last_name: lastName,
-        password,
-      })
+      .post<{ result: 'success' | 'fail'; info?: string }>(
+        URL,
+        {
+          email,
+          first_name: firstName,
+          last_name: lastName,
+          password,
+        },
+        { withCredentials: true }
+      )
       .pipe(
         // tap((res) => console.log(res)),
         catchError((err) => throwError(err)),

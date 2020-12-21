@@ -16,10 +16,12 @@ export class NewsService {
 
   getNews(): Observable<News[]> {
     const URL = this.proxy + '/common/crawldata';
-    return this.http.get<{ crawled_data: News[] }>(URL).pipe(
-      // tap((res) => console.log(res)),
-      catchError((err) => throwError(err)),
-      map((res) => res.crawled_data)
-    );
+    return this.http
+      .get<{ crawled_data: News[] }>(URL, { withCredentials: true })
+      .pipe(
+        // tap((res) => console.log(res)),
+        catchError((err) => throwError(err)),
+        map((res) => res.crawled_data)
+      );
   }
 }
